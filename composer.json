@@ -1,0 +1,22 @@
+{
+    "name": "mcmatters/parsehub-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Borzyonok",
+            "email": "dima.matters@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "McMatters\\ParseHubApi\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
