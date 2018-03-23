@@ -17,12 +17,12 @@ class ParseHubClient
     /**
      * @var Project
      */
-    public $project;
+    protected $project;
 
     /**
      * @var Run
      */
-    public $run;
+    protected $run;
 
     /**
      * ParseHubClient constructor.
@@ -34,5 +34,21 @@ class ParseHubClient
     {
         $this->project = new Project($apiKey, $wait);
         $this->run = new Run($apiKey, $wait);
+    }
+
+    /**
+     * @return Project
+     */
+    public function project(): Project
+    {
+        return $this->project;
+    }
+
+    /**
+     * @return Run
+     */
+    public function run(): Run
+    {
+        return $this->run;
     }
 }

@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Throwable;
 use const false, true;
-use function array_merge_recursive, is_callable, json_decode, sleep, stripos;
+use function array_merge_recursive, is_callable, json_decode, stripos, usleep;
 
 /**
  * Class AbstractResource
@@ -109,7 +109,7 @@ abstract class AbstractResource
                 is_callable([$e, 'getStatusCode']) &&
                 $e->getStatusCode() === 429
             ) {
-                sleep($this->wait);
+                usleep($this->wait * 1000);
 
                 $response = $this->client->request($method, $uri, $options);
             } else {
@@ -143,7 +143,7 @@ abstract class AbstractResource
     {
         $contentTypes = $response->getHeader('Content-Type') ?? [];
 
-        foreach ((array) $contentTypes as $contentType) {
+        foreach ($contentTypes as $contentType) {
             if (false !== stripos($contentType ?? '', 'json')) {
                 return true;
             }
