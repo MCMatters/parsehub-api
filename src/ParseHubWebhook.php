@@ -197,11 +197,11 @@ class ParseHubWebhook
             $this->payload = $payload;
         } elseif (is_object($payload)) {
             $this->payload = (array) $payload;
+        } else {
+            throw new InvalidArgumentException(
+                '$payload must be a string, an array or an object'
+            );
         }
-
-        throw new InvalidArgumentException(
-            '$payload must be a string, an array or an object'
-        );
     }
 
     /**
