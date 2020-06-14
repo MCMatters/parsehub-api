@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\ParseHubApi\Resources;
-
-use Throwable;
 
 /**
  * Class Run
@@ -17,46 +15,48 @@ class Run extends AbstractResource
      * @param string $token
      *
      * @return array
-     * @throws Throwable
      */
     public function get(string $token): array
     {
-        return $this->requestGet("runs/{$token}");
-    }
-
-    /**
-     * @param string $token
-     * @param string $format
-     *
-     * @return array|string
-     * @throws Throwable
-     */
-    public function getData(string $token, string $format = 'json')
-    {
-        return $this->requestGet("runs/{$token}/data", [
-            'format' => $this->getRequestFormat($format),
-        ]);
+        return $this->httpClient->get("runs/{$token}")->json();
     }
 
     /**
      * @param string $token
      *
      * @return array
-     * @throws Throwable
+     */
+    public function getData(string $token): array
+    {
+        return $this->httpClient
+            ->withQuery(['format' => 'json'])
+            ->get("runs/{$token}/data")
+            ->json();
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return array
      */
     public function cancel(string $token): array
     {
-        return $this->requestPost("runs/{$token}/cancel");
+        return $this->httpClient
+            ->post("runs/{$token}/cancel", [
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8',
+                ],
+            ])
+            ->json();
     }
 
     /**
      * @param string $token
      *
      * @return array
-     * @throws Throwable
      */
     public function delete(string $token): array
     {
-        return $this->requestDelete("runs/{$token}");
+        return $this->httpClient->delete("runs/{$token}")->json();
     }
 }

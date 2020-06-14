@@ -1,12 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\ParseHubApi;
 
 use InvalidArgumentException;
-use const null, true;
+
 use function is_array, is_object, is_string, json_decode, parse_str, strtolower;
+
+use const null, true;
 
 /**
  * Class ParseHubWebhook
@@ -29,7 +31,7 @@ class ParseHubWebhook
      *
      * @param mixed $payload
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function __construct($payload)
     {
@@ -39,8 +41,9 @@ class ParseHubWebhook
     /**
      * @param mixed $payload
      *
-     * @return self
-     * @throws InvalidArgumentException
+     * @return \McMatters\ParseHubApi\ParseHubWebhook
+     *
+     * @throws \InvalidArgumentException
      */
     public static function make($payload): self
     {
@@ -187,7 +190,9 @@ class ParseHubWebhook
     /**
      * @param mixed $payload
      *
-     * @throws InvalidArgumentException
+     * @return void
+     *
+     * @throws \InvalidArgumentException
      */
     protected function setPayload($payload)
     {
